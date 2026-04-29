@@ -44,7 +44,7 @@
             // 2. THEN RUN YOUR PYTHON CODE
             // --- ADD STARTUP PYTHON CODE HERE ---
             // This runs as soon as the terminal is ready
-            await pyodide.runPythonAsync(`
+            const pycode = `
 import base64
 from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import scrypt
@@ -106,7 +106,8 @@ async def wrapper():
 # This tells Pyodide to run the coroutine
 import asyncio
 asyncio.ensure_future(wrapper())
-            `);
+            `
+            await pyodide.runPythonAsync(pycode);
             // ------------------------------------
 
             term.onData(async (data) => {
